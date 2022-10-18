@@ -1,9 +1,11 @@
 #include ".\src\complementos\complementos.hpp"
 using namespace Implementaciones;
+Console con = *new Console();
+
 // metodo principal
 int main()
 {
-    Console *con = new Console();
-    con->log("caca asdas");
+    con.error("this is a msg error !", true);
+    con.log("we get info !");
     return 0;
 }

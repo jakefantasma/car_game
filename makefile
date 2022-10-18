@@ -13,6 +13,7 @@ BUILD = build\\
 %.o : $(SRC)%.hpp
 	$(CC) -c $< -o "$(BUILD)$@"
 #build objects
+complementos.o : $(SRC)\\complementos\\complementos.hpp
 main.o : main.cpp
 #object to boild in bin 
 config: 
@@ -21,7 +22,7 @@ config:
 run: 
 	.\\$(BUILD)$(BIN)
 #build bin 
-all: main.o
+all: main.o complementos.o
 	$(CC) -g "$(BUILD)*.o"  -o "$(BUILD)$(BIN)"
 clean: 
-	@cd $(BUILD)  && rm -f $(objs) $(BINw) 
+	@cd $(BUILD)  && rm -f $(BIN) main.o complementos.o
