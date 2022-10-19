@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
 #include <conio.h>
-
 // impllementaciones
+using std::cin;
 using std::cout;
 using std::endl;
+using std::getline;
 using std::string;
 using std::to_string;
 #ifndef Implementaciones
@@ -20,6 +21,8 @@ namespace Implementaciones
         string separador_normal = dupliS(__normal_separador, __limit_w);
         const string __error_color = "4";
         const string __normal_color = "7";
+        const string __warn_color = "6";
+        const string __clear = "cls";
         string dupliS(string msg, int iteraciones)
         {
             string tmp = "";
@@ -31,6 +34,7 @@ namespace Implementaciones
         }
     public:
         Console(){};
+        // set or show info in console
         void log(string msg)
         {
             color(__normal_color);
@@ -39,6 +43,20 @@ namespace Implementaciones
         void log(int msg)
         {
             log(to_string(msg));
+        };
+        void warn(string msg)
+        {
+            warn(msg, false);
+        }
+        void warn(string msg, bool cl)
+        {
+            log(msg);
+            color(__warn_color);
+            __subAwait();
+            if (cl)
+            {
+                clear();
+            }
         };
         void error(string msg)
         {
@@ -63,11 +81,34 @@ namespace Implementaciones
         };
         void clear()
         {
-            system("cls");
+            system(__clear.c_str());
         };
         void __subAwait()
         {
             getch();
+        }
+        // get info
+        string getString(string msg)
+        {
+            log(msg);
+            return getString();
+        }
+        string getString()
+        {
+            string tmp;
+            getline(cin, tmp);
+            return tmp;
+        }
+        int getInteger(string msg)
+        {
+            log(msg);
+            return getInteger();
+        }
+        int getInteger()
+        {
+            int tmp;
+            cin >> tmp;
+            return tmp;
         }
     };
 }
