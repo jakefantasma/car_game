@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
+#include <Windows.h>
 #include <conio.h>
-// impllementaciones
 using std::cin;
 using std::cout;
 using std::endl;
@@ -17,12 +17,16 @@ namespace Implementaciones
         const string __error_separador = "##";
         const string __normal_separador = "--";
         const int __limit_w = 20; // el calculo va de la mano con separador
+        // todo add set methods to config
         string separador_er = dupliS(__error_separador, __limit_w);
         string separador_normal = dupliS(__normal_separador, __limit_w);
-        const string __error_color = "4";
-        const string __normal_color = "7";
-        const string __warn_color = "6";
-        const string __clear = "cls";
+        string __error_color = "4";
+        string __normal_color = "7";
+        string __warn_color = "6";
+        string __clear = "cls";
+        int __z_x = 100;
+        int __z_y = 100;
+        int __awaitFrame = 10;
         string dupliS(string msg, int iteraciones)
         {
             string tmp = "";
@@ -32,6 +36,7 @@ namespace Implementaciones
             }
             return tmp;
         }
+
     public:
         Console(){};
         // set or show info in console
@@ -83,6 +88,17 @@ namespace Implementaciones
         {
             system(__clear.c_str());
         };
+        void defsize()
+        {
+            ResizeScreen(__z_x, __z_y);
+        }
+        void ResizeScreen(int x, int y)
+        {
+            string lines = " lines=" + to_string(x);
+            string col = " cols=" + to_string(y);
+            string comando = "mode con:" + col + lines;
+            system(comando.c_str());
+        };
         void __subAwait()
         {
             getch();
@@ -109,6 +125,15 @@ namespace Implementaciones
             int tmp;
             cin >> tmp;
             return tmp;
+        }
+        // wait in screen
+        void AwaitFrame()
+        {
+            AwaitFrame(__awaitFrame);
+        }
+        void AwaitFrame(int segundos)
+        {
+            Sleep(segundos * 1000);
         }
     };
 }
